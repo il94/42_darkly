@@ -4,4 +4,4 @@ FLAG/ :
 -LOCALISATION:
 	http://192.168.56.101/index.php?page=feedback	
 
-Première faille trouvée et malheuresement par pur hasard, il suffit de taper 'a' dans le champ 'Name'.
+Première faille trouvée et malheuresement par pur hasard, il suffit de taper 'a' ou '<' dans le champ 'Name'.

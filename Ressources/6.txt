@@ -1,0 +1,19 @@
+FLAG/ :
+	46910D9CE35B385885A9F7E2B336249D622F29B267A1771FBACF52133BEDDBA8
+
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=upload
+
+-Contexte:
+	Nous avons la possibilité d'upload des images sur le site
+
+-Description:
+
+Après quelques tests, le système d'upload semble n'accepter que le format ".jpg".
+En interceptant la requête (avec un logiciel comme Burp Suite), nous pouvons
+modifier le nom du fichier et ainsi changer l'extension. De cette manière, nous
+passons la vérification côté front-end, et si le serveur ne fait pas la
+vérification de son côté, nous pouvons envoyer des fichiers sous n'importe
+quelle extension. Nous obtenons le flag de cette manière, mais notons le fait
+que malgré l'extension ".jpg", il n'y a pas de réelle vérification du contenu du
+fichier.
