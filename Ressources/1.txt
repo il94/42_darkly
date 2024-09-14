@@ -4,4 +4,8 @@ FLAG/ :
 -LOCALISATION:
 	http://192.168.56.101/index.php?page=feedback	
 
-Première faille trouvée et malheuresement par pur hasard, il suffit de taper 'a' ou '<' dans le champ 'Name'.
+La faille:
+	Les donnees envoyees dans l'input name ne sont pas nettoyees.
+
+Comment resoudre:
+	Il faut convertir les characteres speciaux cote back afin d'empecher le navigateur de les interpreter.
