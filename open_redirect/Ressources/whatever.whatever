@@ -1,0 +1,9 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=redirect&site=anything.com
+
+La faille:
+	Les redirections sont faites cote front, donc manipuables (phishing par exemple)
+
+Comment resoudre:
+	Limiter voir ne pas utiliser de redirections, sinon les faire cote back,
+	utiliser une white list et avertir l'utilisateur (popup de confirmation)

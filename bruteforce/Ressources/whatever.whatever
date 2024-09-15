@@ -1,0 +1,9 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=signin
+
+La faille:
+	Le serveur ne met pas de limitation ni de delai par requete
+	De plus le site n'applique AUCUNE politique de mot de passe fort
+
+Comment resoudre:
+	Il faut prevenir le spam de requete (CAPTCHA, limitations) et imposer une politique de mot de passe fort

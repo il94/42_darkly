@@ -1,0 +1,8 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=survey
+
+La faille:
+	Les donnees envoyees dans les select ne sont pas controlees cote back ce qui permet d'ajouter autant de vote qu'on veut.
+
+Comment resoudre:
+	Il faut autoriser uniquement les valeurs attendues cote back.

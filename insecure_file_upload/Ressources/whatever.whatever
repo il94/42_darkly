@@ -1,0 +1,8 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=upload
+
+La faille:
+	L'upload ne se fie qu'a l'extension, sans controler le type MIME
+
+Comment resoudre:
+	Il faut controler le type MIME

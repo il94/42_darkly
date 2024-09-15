@@ -1,0 +1,17 @@
+-LOCALISATION:
+	http://192.168.56.101/whatever
+	http://192.168.56.101/admin
+
+-Description:
+
+Depuis le robots.txt, on découvre l'existence du dossier "whatever".
+Dans ce dossier se le fichier "htpasswd", qui contient tout
+simplement les identifiants du compte root avec son mot de passe chiffré en md5.
+Il suffit de se rendre sur la page "/admin" et de taper le mot de passe
+déchiffré ("qwerty123@").
+
+La faille:
+	Les fichiers non indexes sont accessible a n'importe quel utilisateur
+
+Comment resoudre:
+	Il faudrait rediriger les utilisateur autre part s'ils essaient d'acceder a un fichier non indexe

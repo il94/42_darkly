@@ -1,0 +1,9 @@
+-LOCALISATION:
+	http://192.168.56.101/?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f	
+
+La faille:
+	Le probleme ici est que l'utilisateur n'est pas cense acceder a la page s'il ne provient pas d'un referer et d'un browser particulier.
+	Cela peut etre problematique car des bots pourrait se faire passer pour un humain et recuperer les donnees qu'il l'interesse
+
+Comment resoudre:
+	Il faudrait utiliser une liste de cipher suite autorisee (chiffrement TSL/SSL) ce qui bannira automatiquemt toute les requetes provenant de curl, postman, thunderClient....

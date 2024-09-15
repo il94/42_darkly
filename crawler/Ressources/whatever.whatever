@@ -1,0 +1,8 @@
+-LOCALISATION:
+	http://192.168.56.101/.hidden
+
+La faille:
+	Les fichiers non indexes sont accessible a n'importe quel utilisateur
+
+Comment resoudre:
+	Il faudrait rediriger les utilisateur autre part s'ils essaient d'acceder a un fichier non indexe

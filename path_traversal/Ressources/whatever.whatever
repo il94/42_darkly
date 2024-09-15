@@ -1,0 +1,9 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=../../../../../../../etc/passwd
+
+La faille:
+	Le serveur traite tout les URLs sans distinction
+
+Comment resoudre:
+	Il faut utiliser des white lists afin de ne traiter que les URLs publiques
+	De plus, il faut utiliser des redirections afin de ne pas devoiler la logique de routage

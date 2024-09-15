@@ -1,0 +1,8 @@
+-LOCALISATION:
+	http://192.168.56.101/index.php?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4=
+
+La faille:
+	Le site utilise une balise object, dont le contenu est defini par le parametre src de l'url. 
+
+Comment resoudre:
+	Il est deconseille d'utiliser des balise object. Remplacer par les balises de type (img, video ect...), et ne pas afficher les paramaetres dans l'url

@@ -1,0 +1,9 @@
+-LOCALISATION:
+	http://192.168.56.101/
+
+La faille:
+	La valeur set dans un cookie n'est pas hachee correctement
+
+Comment resoudre:
+	Il faut hasher les donnees sensibles avec une cle secrete afin de ne pas pouvoir facilement
+	la decrypter (hachage + salage preferable)
